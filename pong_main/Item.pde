@@ -9,7 +9,7 @@ class Item
   {
     delay = int(random(5000));
 
-    xPos = random(width/3 +50, (width/3) * 2 -50);
+    xPos = random(width/3 +60, (width/3) * 2 -60);
     yPos = -40;
     
    int roll = int(random(0,7));
@@ -99,13 +99,13 @@ class Item
         circle(xPos, yPos, 40);
       }
         
-      yPos += 0.2;
+      yPos += 0.6;
     }else
     {
       delay--;
     }
     
-    if(yPos == height + 30)
+    if(yPos > height + 30)
     {
       return true;
     }else

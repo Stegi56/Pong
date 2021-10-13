@@ -32,7 +32,7 @@ class Paddle
     fill(paddleColor);
     rectMode(CENTER);
     stroke(0);
-    strokeWeight(4);
+    strokeWeight(5);
     rect(xPos, yPos, 40, paddleLength);    
   }
   
@@ -40,11 +40,11 @@ class Paddle
   {
     if((direction == "DOWN") && (yPos + paddleLength/2 + 1 < height))
     {
-      yPos += 5;
+      yPos += 7;
     }
     else if((direction == "UP") && (yPos - paddleLength/2 + 1 > 0))
     {
-      yPos -= 5;
+      yPos -= 7;
     }
   }
   

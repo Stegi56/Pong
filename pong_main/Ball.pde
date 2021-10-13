@@ -8,13 +8,12 @@ class Ball
   float ballDiameter;
   int paddleFrom;
   int paddleTo;
-  int checkCounter;
   
   Ball(int start, float x, float y)
   {
     //initialise ball parameters
     //center ball
-    resultantVelocity = 3;
+    resultantVelocity = 2;
     
     //roll a dice of 2 to find start direction
     if(start == 2)
@@ -49,12 +48,9 @@ class Ball
     circle(xPos, yPos, ballDiameter);
 
     //if ball hits top or bottom of screen bounce
-    if((yPos > height - ballDiameter/2) && (vy > 0))
+    if((yPos > height - ballDiameter/2) && (vy > 0) || (yPos < ballDiameter/2) && (vy < 0))
     {
       vy *= -1;
-    }else if((yPos < ballDiameter/2) && (vy < 0))
-    {
-      vy *=-1;
     }
 
     //check if hit horizontal edge
@@ -66,10 +62,10 @@ class Ball
       paddleFrom = invertIndex(paddleFrom);
       paddleTo = invertIndex(paddleTo);
       
-      xPos += vx * 5;
-      
     //check if hit paddle
-    }else if(((xPos > width - ballDiameter/2 - 15) || (xPos < ballDiameter/2 + 15))
+    //((ball within paddle left x?) OR (ball within paddle right x?) AND (ball y within paddle length?))
+   
+    }else if((((xPos > width - ballDiameter/2 - 30) && (vx > 0)) || ((xPos < ballDiameter/2 + 30) && (vx < 0)))
                 && (dist(0, yPos, 0, paddles[paddleTo].getYpos()) < paddles[paddleTo].getPaddleLength()/2))
     {
       float yDifference = (yPos - paddles[paddleTo].getYpos());
@@ -77,14 +73,12 @@ class Ball
       
       vx = sqrt(pow(resultantVelocity, 2) - pow(vy, 2));
       
-      if(paddleTo == 1)
+      if(paddleFrom == 0)
       {
         vx *= -1;
-      }
-      
+      }    
       println("pass");
       
-      xPos += vx;
       paddleFrom = invertIndex(paddleFrom);
       paddleTo = invertIndex(paddleTo);
     }
@@ -97,7 +91,7 @@ class Ball
         
         if(type == "newBall")
         {
-          if(balls.size() < 5)
+          if(balls.size() < 3)
           {
             if((items[i].getYpos() < 40) || (items[i].getYpos() > height - 40))
             {
@@ -109,19 +103,19 @@ class Ball
           }
         }else if(type == "speedUp")
         {
-          if(resultantVelocity < 4)
+          if(resultantVelocity < 6)
           {
-            resultantVelocity += 1;
+            resultantVelocity += 2;
           }
         }else if(type == "speedDown")
         {
-          if(resultantVelocity > 2)
+          if(resultantVelocity > 1)
           {
             resultantVelocity -= 0.7;
           }
         }else if(type == "paddleUp")
         {
-          if(paddles[paddleFrom].getPaddleLength() < 300)
+          if(paddles[paddleFrom].getPaddleLength() < 500)
           {
             paddles[paddleFrom].changePaddle(50);
           }
@@ -133,22 +127,21 @@ class Ball
           }          
         }else if(type == "ballUp")
         {
-          if(ballDiameter < 200)
+          if(ballDiameter < 150)
           {
-            ballDiameter += 10;
+            ballDiameter += 20;
           }
         }else if(type == "ballDown")
         {
           if(ballDiameter > 40)
           {
-            ballDiameter -= 7;
+            ballDiameter -= 20;
           }
         }
         items[i] = new Item();
       }
     }
     
-    checkCounter++;
     xPos += vx;
     yPos += vy;
   }

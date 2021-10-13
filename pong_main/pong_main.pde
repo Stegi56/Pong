@@ -13,7 +13,7 @@ void setup()
   size(1920,1080);
   //size(1000,600);
   paddles = new Paddle[2];
-  items = new Item[100];
+  items = new Item[20];
   
   keys = new boolean[4];
   
