@@ -1,21 +1,23 @@
-Ball[] balls;
+//array list is used for balls as the amount of balls is dynamic
+ArrayList<Ball> balls = new ArrayList<Ball>();
+
 Paddle[] paddles;
 Item[] items;
 
+//A list of keys and their status is stored to allow simultaneous key presses
 boolean[] keys;
 
 void setup()
 {  
   frameRate(144);
   size(1000,600);
-  balls = new Ball[1];
   paddles = new Paddle[2];
-  items = new Item[300];
+  items = new Item[500];
   
   keys = new boolean[4];
   
   //initialise ball
-  balls[0] = new Ball();
+  balls.add(new Ball());
   
   initialisePaddles();
   initialiseItems();
@@ -110,19 +112,23 @@ void initialisePaddles()
 
 void addBall()
 {
-  balls[balls.length] = new Ball();
+  balls.add(new Ball());
 }
 
 void checkMovement()
 {
-  for(int i = 0; i < balls.length; i++)
+  for(int i = 0; i < balls.size(); i++)
   {
-    balls[i].display();
+    balls.get(i).display();
   } 
   
   for(int i = 0; i < items.length; i++)
   {
-    items[i].display();
+    boolean reset = items[i].display();
+    if(reset == true)
+    {
+      items[i] = new Item();
+    }
   }
   
   if(keys[0] == true)

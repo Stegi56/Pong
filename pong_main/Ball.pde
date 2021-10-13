@@ -78,6 +78,38 @@ class Ball
       paddleTo = invertIndex(paddleTo);
     }
     
+    for(int i = 0; i < items.length; i++)
+    {
+      if(dist(xPos, yPos, items[i].getXpos(), items[i].getYpos()) < ballDiameter)
+      {
+        String type = items[i].getType();
+        
+        if(type == "newBall")
+        {
+          addBall();
+        }else if(type == "speedUp")
+        {
+          
+        }else if(type == "speedDown")
+        {
+          
+        }else if(type == "paddleUp")
+        {
+          
+        }else if(type == "paddleDown")
+        {
+          
+        }else if(type == "ballUp")
+        {
+          
+        }else if(type == "ballDown")
+        {
+          
+        }
+        items[i] = new Item();
+      }
+    }
+    
     checkCounter++;
     xPos += vx;
     yPos += vy;

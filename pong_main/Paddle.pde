@@ -9,7 +9,7 @@ class Paddle
   {
     xPos = x;
     yPos = y/2;
-    paddleLength = 200;
+    paddleLength = 150;
     paddleColor = c;
   }
   float getXpos()

@@ -7,37 +7,37 @@ class Item
   
   Item()
   {
-    delay = int(random(200,5000));
+    delay = int(random(5000));
 
-    xPos = random(width/3 +20, (width/3) * 2 -20);
-    yPos = -30;
+    xPos = random(width/3 +30, (width/3) * 2 -30);
+    yPos = -20;
     
-   int roll = int(random(0,6));
+   int roll = int(random(0,7));
     if(roll == 0)
     {
       type = "newBall";
     } 
-    if(roll == 0)
+    if(roll == 1)
     {
       type = "speedUp";
     } 
-    if(roll == 0)
+    if(roll == 2)
     {
     type = "speedDown";
     }
-    if(roll == 0)
+    if(roll == 3)
     {
     type = "paddleUp";
     }
-    if(roll == 0)
+    if(roll == 4)
     {
     type = "paddleDown";
     }
-    if(roll == 0)
+    if(roll == 5)
     {
     type = "ballUp";
     }
-    if(roll == 0)
+    if(roll == 6)
     {
     type = "ballDown";
     }
@@ -58,47 +58,59 @@ class Item
     return yPos;
   }
   
-  void display()
+  boolean display()
   {
     if(delay == 0)
     {
       if(type == "newBall")
       {
-        fill(250,250,0);
+        fill(250, 250, 0);
         circle(xPos, yPos, 40);
       }else if(type == "speedUp")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);        
+        fill(86, 11, 173);
+        triangle(xPos, yPos - 20, xPos - 20, yPos + 20, xPos +20, yPos + 20);       
       }else if(type == "speedDown")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);        
+        fill(72, 12, 168);
+        triangle(xPos, yPos + 20, xPos - 20, yPos - 20, xPos +20, yPos - 20);         
       }else if(type == "paddleUp")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);        
+        fill(58, 12, 163);   
+        rectMode(CENTER);
+        rect(xPos, yPos, 20, 40);
       }else if(type == "paddleDown")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);        
+        fill(63, 55, 201);
+        rectMode(CENTER);
+        rect(xPos, yPos, 40, 20);       
       }else if(type == "ballUp")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);               
+        fill(67, 97, 238);
+        circle(xPos, yPos, 40); 
+        fill(250, 250, 0);
+        circle(xPos, yPos, 20); 
       }else if(type == "ballDown")
       {
-        fill(250,250,0);
-        circle(xPos, yPos, 40);        
+        fill(250, 250, 0);
+        circle(xPos, yPos, 40);  
+        fill(114, 9, 183);
+        circle(xPos, yPos, 20);
       }
-      
-      
-      
-      
+        
       yPos += 0.5;
     }else
     {
       delay--;
     }
+    
+    if(yPos == height + 30)
+    {
+      return true;
+    }else
+    {
+      return false;
+    }
+    
   }
 }
