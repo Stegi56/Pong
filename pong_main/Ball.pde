@@ -39,7 +39,7 @@ class Ball
       paddleTo = 0;
     }
     vy = 0;
-    ballDiameter = 40;
+    ballDiameter = 60;
   }
   
   void display()
@@ -49,9 +49,12 @@ class Ball
     circle(xPos, yPos, ballDiameter);
 
     //if ball hits top or bottom of screen bounce
-    if((yPos > height - ballDiameter/2) || (yPos < ballDiameter/2))
+    if((yPos > height - ballDiameter/2) && (vy > 0))
     {
       vy *= -1;
+    }else if((yPos < ballDiameter/2) && (vy < 0))
+    {
+      vy *=-1;
     }
 
     //check if hit horizontal edge
@@ -88,13 +91,13 @@ class Ball
     
     for(int i = 0; i < items.length; i++)
     {
-      if(dist(xPos, yPos, items[i].getXpos(), items[i].getYpos()) < ballDiameter)
+      if(dist(xPos, yPos, items[i].getXpos(), items[i].getYpos()) < ballDiameter/2 + 40)
       {
         String type = items[i].getType();
         
         if(type == "newBall")
         {
-          if(balls.size() < 4)
+          if(balls.size() < 5)
           {
             if((items[i].getYpos() < 40) || (items[i].getYpos() > height - 40))
             {
@@ -106,27 +109,27 @@ class Ball
           }
         }else if(type == "speedUp")
         {
-          if(resultantVelocity < 5)
+          if(resultantVelocity < 4)
           {
-            resultantVelocity += 0.5;
+            resultantVelocity += 1;
           }
         }else if(type == "speedDown")
         {
           if(resultantVelocity > 2)
           {
-            resultantVelocity -= 0.5;
+            resultantVelocity -= 0.7;
           }
         }else if(type == "paddleUp")
         {
           if(paddles[paddleFrom].getPaddleLength() < 300)
           {
-            paddles[paddleFrom].changePaddle(25);
+            paddles[paddleFrom].changePaddle(50);
           }
         }else if(type == "paddleDown")
         {
-          if(paddles[paddleTo].getPaddleLength() > 50)
+          if(paddles[paddleTo].getPaddleLength() > 150)
           {
-            paddles[paddleTo].changePaddle(-25);
+            paddles[paddleTo].changePaddle(-50);
           }          
         }else if(type == "ballUp")
         {
@@ -136,9 +139,9 @@ class Ball
           }
         }else if(type == "ballDown")
         {
-          if(ballDiameter > 20)
+          if(ballDiameter > 40)
           {
-            ballDiameter -= 10;
+            ballDiameter -= 7;
           }
         }
         items[i] = new Item();

@@ -10,9 +10,10 @@ boolean[] keys;
 void setup()
 {  
   frameRate(144);
-  size(1000,600);
+  size(1920,1080);
+  //size(1000,600);
   paddles = new Paddle[2];
-  items = new Item[15];
+  items = new Item[100];
   
   keys = new boolean[4];
   
@@ -71,8 +72,8 @@ void keyReleased()
 void draw()
 {
   background(120);
-  fill(80);
-  strokeWeight(15);
+  fill(110);
+  strokeWeight(30);
   stroke(80);
   line(width/3, 0, width/3, height);
   line(width/3*2, 0, width/3*2, height);
@@ -101,11 +102,11 @@ void initialisePaddles()
   if(i == 0)
   {
     //LHS
-    paddles[i] = new Paddle(5, height, color(57,57,220), width, height);
+    paddles[i] = new Paddle(5, color(57,57,220));
   }else
   {
     //RHS
-    paddles[i] = new Paddle(width - 6, height, color(220,57,57), width, height);
+    paddles[i] = new Paddle(width - 6, color(220,57,57));
   }
 }
 }

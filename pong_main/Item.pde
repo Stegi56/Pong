@@ -9,8 +9,8 @@ class Item
   {
     delay = int(random(5000));
 
-    xPos = random(width/3 +30, (width/3) * 2 -30);
-    yPos = 0;
+    xPos = random(width/3 +50, (width/3) * 2 -50);
+    yPos = -40;
     
    int roll = int(random(0,7));
     if(roll == 0)
@@ -66,40 +66,40 @@ class Item
       if(type == "newBall")
       {
         fill(250, 250, 0);
-        circle(xPos, yPos, 40);
+        circle(xPos, yPos, 60);
       }else if(type == "speedUp")
       {
         fill(86, 11, 173);
-        triangle(xPos, yPos - 20, xPos - 20, yPos + 20, xPos +20, yPos + 20);       
+        triangle(xPos, yPos - 40, xPos - 40, yPos + 40, xPos +40, yPos + 40);       
       }else if(type == "speedDown")
       {
         fill(72, 12, 168);
-        triangle(xPos, yPos + 20, xPos - 20, yPos - 20, xPos +20, yPos - 20);         
+        triangle(xPos, yPos + 40, xPos - 40, yPos - 40, xPos +40, yPos - 40);         
       }else if(type == "paddleUp")
       {
         fill(58, 12, 163);   
         rectMode(CENTER);
-        rect(xPos, yPos, 20, 40);
+        rect(xPos, yPos, 40, 80);
       }else if(type == "paddleDown")
       {
         fill(63, 55, 201);
         rectMode(CENTER);
-        rect(xPos, yPos, 40, 20);       
+        rect(xPos, yPos, 80, 40);       
       }else if(type == "ballUp")
       {
         fill(67, 97, 238);
-        circle(xPos, yPos, 40); 
+        circle(xPos, yPos, 80); 
         fill(250, 250, 0);
-        circle(xPos, yPos, 20); 
+        circle(xPos, yPos, 40); 
       }else if(type == "ballDown")
       {
         fill(250, 250, 0);
-        circle(xPos, yPos, 40);  
+        circle(xPos, yPos, 80);  
         fill(114, 9, 183);
-        circle(xPos, yPos, 20);
+        circle(xPos, yPos, 40);
       }
         
-      yPos += 0.5;
+      yPos += 0.2;
     }else
     {
       delay--;

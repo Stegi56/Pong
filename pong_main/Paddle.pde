@@ -5,11 +5,11 @@ class Paddle
   float paddleLength;
   color paddleColor;
   
-  Paddle(int x, int y, color c, float Width, float Height)
+  Paddle(int x, color c)
   {
     xPos = x;
-    yPos = y/2;
-    paddleLength = 150;
+    yPos = height/2;
+    paddleLength = 200;
     paddleColor = c;
   }
   float getXpos()
@@ -31,7 +31,9 @@ class Paddle
   {
     fill(paddleColor);
     rectMode(CENTER);
-    rect(xPos, yPos, 20, paddleLength);    
+    stroke(0);
+    strokeWeight(4);
+    rect(xPos, yPos, 40, paddleLength);    
   }
   
   void movePaddle(String direction)
