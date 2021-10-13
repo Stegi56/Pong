@@ -10,16 +10,23 @@ class Ball
   int paddleTo;
   int checkCounter;
   
-  Ball()
+  Ball(int start, float x, float y)
   {
     //initialise ball parameters
     //center ball
-    xPos = width/2;
-    yPos = height/2;
     resultantVelocity = 3;
     
     //roll a dice of 2 to find start direction
-    int start = int(random(2));
+    if(start == 2)
+    {
+      start = int(random(2));
+      xPos = width/2;
+      yPos = height/2;
+    }else
+    {
+      xPos = x;
+      yPos = y;
+    }
     if(start == 1)
     {
       vx = resultantVelocity;
@@ -38,6 +45,7 @@ class Ball
   void display()
   {
     fill(255,255,0);
+    noStroke();
     circle(xPos, yPos, ballDiameter);
 
     //if ball hits top or bottom of screen bounce
@@ -86,25 +94,52 @@ class Ball
         
         if(type == "newBall")
         {
-          addBall();
+          if(balls.size() < 4)
+          {
+            if((items[i].getYpos() < 40) || (items[i].getYpos() > height - 40))
+            {
+              addBall(paddleTo, width/2, height/2);
+            }else
+            {
+              addBall(paddleTo, items[i].getXpos(), items[i].getYpos());
+            }
+          }
         }else if(type == "speedUp")
         {
-          
+          if(resultantVelocity < 5)
+          {
+            resultantVelocity += 0.5;
+          }
         }else if(type == "speedDown")
         {
-          
+          if(resultantVelocity > 2)
+          {
+            resultantVelocity -= 0.5;
+          }
         }else if(type == "paddleUp")
         {
-          
+          if(paddles[paddleFrom].getPaddleLength() < 300)
+          {
+            paddles[paddleFrom].changePaddle(25);
+          }
         }else if(type == "paddleDown")
         {
-          
+          if(paddles[paddleTo].getPaddleLength() > 50)
+          {
+            paddles[paddleTo].changePaddle(-25);
+          }          
         }else if(type == "ballUp")
         {
-          
+          if(ballDiameter < 200)
+          {
+            ballDiameter += 10;
+          }
         }else if(type == "ballDown")
         {
-          
+          if(ballDiameter > 20)
+          {
+            ballDiameter -= 10;
+          }
         }
         items[i] = new Item();
       }

@@ -12,12 +12,12 @@ void setup()
   frameRate(144);
   size(1000,600);
   paddles = new Paddle[2];
-  items = new Item[500];
+  items = new Item[15];
   
   keys = new boolean[4];
   
   //initialise ball
-  balls.add(new Ball());
+  balls.add(new Ball(2,2,2));
   
   initialisePaddles();
   initialiseItems();
@@ -110,9 +110,9 @@ void initialisePaddles()
 }
 }
 
-void addBall()
+void addBall(int start, float x, float y)
 {
-  balls.add(new Ball());
+  balls.add(new Ball(start, x, y));
 }
 
 void checkMovement()

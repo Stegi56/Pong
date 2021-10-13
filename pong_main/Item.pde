@@ -10,7 +10,7 @@ class Item
     delay = int(random(5000));
 
     xPos = random(width/3 +30, (width/3) * 2 -30);
-    yPos = -20;
+    yPos = 0;
     
    int roll = int(random(0,7));
     if(roll == 0)
@@ -62,6 +62,7 @@ class Item
   {
     if(delay == 0)
     {
+      noStroke();
       if(type == "newBall")
       {
         fill(250, 250, 0);

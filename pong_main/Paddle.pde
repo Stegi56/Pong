@@ -45,4 +45,9 @@ class Paddle
       yPos -= 5;
     }
   }
+  
+  void changePaddle(int change)
+  {
+    paddleLength += change;
+  }
 }
