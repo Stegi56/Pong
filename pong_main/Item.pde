@@ -7,6 +7,7 @@ class Item
   
   Item()
   {
+    //delay to prevent all items from dropping simultaneously
     delay = int(random(5000));
 
     xPos = random(width/3 +60, (width/3) * 2 -60);
@@ -60,6 +61,7 @@ class Item
   
   boolean display()
   {
+    //check if delay has ended
     if(delay == 0)
     {
       noStroke();
@@ -105,6 +107,7 @@ class Item
       delay--;
     }
     
+    //return status of whether the item has reached the end of the screen
     if(yPos > height + 30)
     {
       return true;

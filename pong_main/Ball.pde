@@ -68,11 +68,15 @@ class Ball
     }else if((((xPos > width - ballDiameter/2 - 30) && (vx > 0)) || ((xPos < ballDiameter/2 + 30) && (vx < 0)))
                 && (dist(0, yPos, 0, paddles[paddleTo].getYpos()) < paddles[paddleTo].getPaddleLength()/2))
     {
+      //calculating diffrence of ballX and paddleX
       float yDifference = (yPos - paddles[paddleTo].getYpos());
+      //using 1(00/ total) * amount to determine vy after hit
       vy = (resultantVelocity * 2 / paddles[paddleTo].getPaddleLength()) * yDifference;
-      
+      //using pythagoras and new vy to calculate new x so that the resultant velocity remains the same
       vx = sqrt(pow(resultantVelocity, 2) - pow(vy, 2));
       
+      //if require as sometimes the ball can get stuck if one pass is not enough to get out of border
+      //starts bouncing inside it
       if(paddleFrom == 0)
       {
         vx *= -1;
@@ -85,10 +89,13 @@ class Ball
     
     for(int i = 0; i < items.length; i++)
     {
+      //check for item collsision
       if(dist(xPos, yPos, items[i].getXpos(), items[i].getYpos()) < ballDiameter/2 + 40)
       {
+        //get item type
         String type = items[i].getType();
         
+        //add new ball
         if(type == "newBall")
         {
           if(balls.size() < 3)
@@ -101,36 +108,54 @@ class Ball
               addBall(paddleTo, items[i].getXpos(), items[i].getYpos());
             }
           }
+        //increase resultant velocity
         }else if(type == "speedUp")
         {
           if(resultantVelocity < 6)
           {
-            resultantVelocity += 2;
+            vx /= resultantVelocity;
+            vy /= resultantVelocity;
+            resultantVelocity += 1;
+            vx *= resultantVelocity;
+            vy *= resultantVelocity;
           }
+        //decrease resultant velocity
         }else if(type == "speedDown")
         {
           if(resultantVelocity > 1)
           {
-            resultantVelocity -= 0.7;
+            vx /= resultantVelocity;
+            vy /= resultantVelocity;
+            resultantVelocity -= 1;
+            vx *= resultantVelocity;
+            vy *= resultantVelocity;
           }
+        
+        //increase paddle from size
         }else if(type == "paddleUp")
         {
           if(paddles[paddleFrom].getPaddleLength() < 500)
           {
             paddles[paddleFrom].changePaddle(50);
           }
+        
+        //increase paddle to size
         }else if(type == "paddleDown")
         {
           if(paddles[paddleTo].getPaddleLength() > 150)
           {
             paddles[paddleTo].changePaddle(-50);
           }          
+          
+        //increase ball size
         }else if(type == "ballUp")
         {
           if(ballDiameter < 150)
           {
             ballDiameter += 20;
           }
+          
+        //decrease ball size
         }else if(type == "ballDown")
         {
           if(ballDiameter > 40)
@@ -142,6 +167,7 @@ class Ball
       }
     }
     
+    //update ball position
     xPos += vx;
     yPos += vy;
   }

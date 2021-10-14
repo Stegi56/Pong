@@ -10,16 +10,20 @@ boolean[] keys;
 void setup()
 {  
   frameRate(144);
-  size(1920,1080);
+  fullScreen();
   //size(1000,600);
+  
+  //initialise ball and items arrays
   paddles = new Paddle[2];
   items = new Item[20];
   
+  //initialise key status array
   keys = new boolean[4];
   
   //initialise ball
   balls.add(new Ball(2,2,2));
   
+  //call to paddle and item constructors
   initialisePaddles();
   initialiseItems();
   
@@ -79,12 +83,8 @@ void draw()
   line(width/3*2, 0, width/3*2, height);
   strokeWeight(1);
   stroke(0);
-  checkMovement();
   
-  for(int i = 0; i < paddles.length; i++)
-  {
-    paddles[i].display();
-  }
+  checkMovement();
 }
 
 void initialiseItems()
@@ -118,6 +118,11 @@ void addBall(int start, float x, float y)
 
 void checkMovement()
 {
+  for(int i = 0; i < paddles.length; i++)
+  {
+    paddles[i].display();
+  }
+  
   for(int i = 0; i < balls.size(); i++)
   {
     balls.get(i).display();
