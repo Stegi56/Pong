@@ -13,7 +13,7 @@ class Ball
   {
     //initialise ball parameters
     //center ball
-    resultantVelocity = 2;
+    resultantVelocity = 3;
     
     //roll a dice of 2 to find start direction
     if(start == 2)
@@ -105,7 +105,7 @@ class Ball
         //add new ball
         if(type == "newBall")
         {
-          if(balls.size() < 10)
+          if(balls.size() < 4)
           {
             if((items[i].getYpos() < 40) || (items[i].getYpos() > height - 40))
             {
@@ -122,7 +122,7 @@ class Ball
           {
             vx /= resultantVelocity;
             vy /= resultantVelocity;
-            resultantVelocity += 1;
+            resultantVelocity += 2;
             vx *= resultantVelocity;
             vy *= resultantVelocity;
           }

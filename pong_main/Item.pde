@@ -8,7 +8,7 @@ class Item
   Item()
   {
     //delay to prevent all items from dropping simultaneously
-    delay = int(random(5000));
+    delay = int(random(4000));
 
     xPos = random(width/3 +60, (width/3) * 2 -60);
     yPos = -40;
@@ -68,7 +68,7 @@ class Item
       if(type == "newBall")
       {
         fill(250, 250, 0);
-        circle(xPos, yPos, 60);
+        circle(xPos, yPos, 80);
       }else if(type == "speedUp")
       {
         fill(86, 11, 173);
@@ -89,19 +89,19 @@ class Item
         rect(xPos, yPos, 80, 40);       
       }else if(type == "ballUp")
       {
-        fill(67, 97, 238);
-        circle(xPos, yPos, 80); 
-        fill(250, 250, 0);
-        circle(xPos, yPos, 40); 
-      }else if(type == "ballDown")
-      {
         fill(250, 250, 0);
         circle(xPos, yPos, 80);  
         fill(114, 9, 183);
         circle(xPos, yPos, 40);
+      }else if(type == "ballDown")
+      {
+        fill(67, 97, 238);
+        circle(xPos, yPos, 80); 
+        fill(250, 250, 0);
+        circle(xPos, yPos, 40); 
       }
         
-      yPos += 0.6;
+      yPos += 0.3;
     }else
     {
       delay--;

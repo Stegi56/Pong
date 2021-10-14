@@ -27,7 +27,7 @@ void setup()
   
   //initialise ball and items arrays
   paddles = new Paddle[2];
-  items = new Item[200];
+  items = new Item[10];
   
   //initialise key status array
   keys = new boolean[4];
