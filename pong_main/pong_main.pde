@@ -214,8 +214,11 @@ void displayLives()
 void startScreen()
 {
   fill(255);
+  textSize(150);
+  text("Pong.", width/2, height/2 - 150);
+  
   textSize(100);
-  text("PRESS SPACE", width/2, height/2 - 100);
+  text("PRESS SPACE", width/2, height/2 + 200);
   
 }
 
