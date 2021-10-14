@@ -1,4 +1,9 @@
 //array list is used for balls as the amount of balls is dynamic
+//import pixel font
+PFont = pixel;
+pixel = createFont("zx_spectrum-7_bold.ttf",128);
+textFont(pixel, 60);
+
 ArrayList<Ball> balls = new ArrayList<Ball>();
 
 Paddle[] paddles;
@@ -8,6 +13,8 @@ Item[] items;
 boolean[] keys;
 
 boolean gameStart = false;
+int p1score = 0;
+int p2score = 0;
 
 void setup()
 {  
@@ -28,6 +35,8 @@ void setup()
   //call to paddle and item constructors
   initialisePaddles();
   initialiseItems();
+  
+  displayScores();
   
   for(int i = 0; i < keys.length; i++)
   {
@@ -92,14 +101,14 @@ void draw()
   strokeWeight(1);
   stroke(0);
   
-  checkMovement();
-  displayFrameRate();
-  
+  checkMovement();  
   if(gameStart != true)
   {
     noLoop();
     startScreen();
   }
+  displayFrameRate();
+
   
 }
 
@@ -124,7 +133,6 @@ void initialisePaddles()
     //RHS
     paddles[i] = new Paddle(width - 6, color(220,57,57));
   }
-}
 }
 
 void addBall(int start, float x, float y)
@@ -171,15 +179,20 @@ void checkMovement()
   }
 }
 
+void displayScores()
+{
+  fill(255);
+  textSize(200);
+  textAlign(CENTER);
+  text(nf(p1score), width/4, height/4 - 100);
+}
+
 void startScreen()
 {
   fill(255);
   textSize(40);
-  PFont font;
-  font = createFont("zx_spectrum-7_bold.ttf",128);
-  textFont(font, 50);
   textAlign(CENTER);
-  text("PRESS SPACE", width/2, height/2);
+  text("PRESS SPACE", width/2, height/2 - 100);
   
 }
 
@@ -189,6 +202,6 @@ void displayFrameRate()
   String message = nf(frameRate, 0, 1) + " frames per second";
   fill(0);
   textSize(20);
-  text(message, width - textWidth(message), 20);
+  text(message, width - 190, 20);
   println(message);
 }
