@@ -7,19 +7,25 @@ Item[] items;
 //A list of keys and their status is stored to allow simultaneous key presses
 boolean[] keys;
 
+boolean gameStart = false;
+
 void setup()
 {  
   frameRate(144);
-  size(1920,1080);
+  fullScreen();
   //size(1000,600);
+  
+  //initialise ball and items arrays
   paddles = new Paddle[2];
   items = new Item[20];
   
+  //initialise key status array
   keys = new boolean[4];
   
   //initialise ball
   balls.add(new Ball(2,2,2));
   
+  //call to paddle and item constructors
   initialisePaddles();
   initialiseItems();
   
@@ -59,6 +65,12 @@ void keyReleased()
   {
     keys[1] = false;
   }
+  if(key == ' ')
+  {
+    gameStart = true;
+    loop();
+  }
+  
   if(keyCode == UP)
   {
     keys[2] = false;
@@ -79,12 +91,16 @@ void draw()
   line(width/3*2, 0, width/3*2, height);
   strokeWeight(1);
   stroke(0);
-  checkMovement();
   
-  for(int i = 0; i < paddles.length; i++)
+  checkMovement();
+  displayFrameRate();
+  
+  if(gameStart != true)
   {
-    paddles[i].display();
+    noLoop();
+    startScreen();
   }
+  
 }
 
 void initialiseItems()
@@ -118,6 +134,11 @@ void addBall(int start, float x, float y)
 
 void checkMovement()
 {
+  for(int i = 0; i < paddles.length; i++)
+  {
+    paddles[i].display();
+  }
+  
   for(int i = 0; i < balls.size(); i++)
   {
     balls.get(i).display();
@@ -148,4 +169,26 @@ void checkMovement()
   {
     paddles[1].movePaddle("DOWN");
   }
+}
+
+void startScreen()
+{
+  fill(255);
+  textSize(40);
+  PFont font;
+  font = createFont("zx_spectrum-7_bold.ttf",128);
+  textFont(font, 50);
+  textAlign(CENTER);
+  text("PRESS SPACE", width/2, height/2);
+  
+}
+
+//Framerate counter taken from computational thinking lecutre by Jo Wood
+void displayFrameRate() 
+{
+  String message = nf(frameRate, 0, 1) + " frames per second";
+  fill(0);
+  textSize(20);
+  text(message, width - textWidth(message), 20);
+  println(message);
 }
