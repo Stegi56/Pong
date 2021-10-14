@@ -1,9 +1,4 @@
 //array list is used for balls as the amount of balls is dynamic
-//import pixel font
-PFont = pixel;
-pixel = createFont("zx_spectrum-7_bold.ttf",128);
-textFont(pixel, 60);
-
 ArrayList<Ball> balls = new ArrayList<Ball>();
 
 Paddle[] paddles;
@@ -13,18 +8,26 @@ Item[] items;
 boolean[] keys;
 
 boolean gameStart = false;
-int p1score = 0;
-int p2score = 0;
+boolean gameEnd = false;
+
+int redLives = 5;
+int blueLives = 5;
 
 void setup()
 {  
   frameRate(144);
-  fullScreen();
-  //size(1000,600);
+  //fullScreen();
+  size(1920,1080);
+  
+  //initialise font
+  PFont font;
+  font = createFont("zx_spectrum-7_bold.ttf",128);
+  textFont(font);
+  textAlign(CENTER);
   
   //initialise ball and items arrays
   paddles = new Paddle[2];
-  items = new Item[20];
+  items = new Item[200];
   
   //initialise key status array
   keys = new boolean[4];
@@ -35,8 +38,6 @@ void setup()
   //call to paddle and item constructors
   initialisePaddles();
   initialiseItems();
-  
-  displayScores();
   
   for(int i = 0; i < keys.length; i++)
   {
@@ -101,15 +102,19 @@ void draw()
   strokeWeight(1);
   stroke(0);
   
-  checkMovement();  
+  displayLives();
+  displayFrameRate();
+  checkMovement();
+  
   if(gameStart != true)
   {
     noLoop();
     startScreen();
   }
-  displayFrameRate();
-
-  
+  if(gameEnd == true)
+  {
+    displayLives();
+  }
 }
 
 void initialiseItems()
@@ -133,6 +138,7 @@ void initialisePaddles()
     //RHS
     paddles[i] = new Paddle(width - 6, color(220,57,57));
   }
+}
 }
 
 void addBall(int start, float x, float y)
@@ -179,29 +185,44 @@ void checkMovement()
   }
 }
 
-void displayScores()
+void displayLives()
 {
   fill(255);
-  textSize(200);
-  textAlign(CENTER);
-  text(nf(p1score), width/4, height/4 - 100);
+  textSize(150);
+  
+  text(nf(redLives), width/6, height/5);
+  text(nf(blueLives), (width/6) * 5, height/5);
+  
+  //I don't know why the game says red wins when blue is on 0 when using this logic, but it works
+  if(blueLives == 0)
+  {
+    fill(255);
+    textSize(200);
+    text("BLUE WINS!", width/2, height/2 - 100);
+    gameEnd = true;
+    noLoop();
+  }else if(redLives == 0)
+  {
+    fill(255);
+    textSize(200);
+    text("RED WINS!", width/2, height/2 - 100);
+    gameEnd = true;
+    noLoop();
+  }
 }
 
 void startScreen()
 {
   fill(255);
-  textSize(40);
-  textAlign(CENTER);
+  textSize(100);
   text("PRESS SPACE", width/2, height/2 - 100);
   
 }
 
 //Framerate counter taken from computational thinking lecutre by Jo Wood
 void displayFrameRate() 
-{
-  String message = nf(frameRate, 0, 1) + " frames per second";
+{ 
   fill(0);
   textSize(20);
-  text(message, width - 190, 20);
-  println(message);
+  text(nf(frameRate, 0, 1) + " frames per second", width - 190, 20);
 }

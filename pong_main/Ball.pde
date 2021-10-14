@@ -56,14 +56,21 @@ class Ball
     //check if hit horizontal edge
     if(((xPos > width - ballDiameter/2) && (paddleTo == 1)) || ((xPos < ballDiameter/2) && (paddleTo == 0)))
     {
-      println("GAME OVER");
+      if(paddleTo == 0)
+      {
+        redLives --;
+      }else
+      {
+        blueLives --;
+      }
       vx *= -1;
       
       paddleFrom = invertIndex(paddleFrom);
       paddleTo = invertIndex(paddleTo);
       
     //check if hit paddle
-    //((ball within paddle left x?) OR (ball within paddle right x?) AND (ball y within paddle length?))
+    //((ball within paddle left x? AND traveling to left?) OR (ball within paddle right x? AND traveling to right?) 
+    //  AND (ball y within paddle length?))
    
     }else if((((xPos > width - ballDiameter/2 - 30) && (vx > 0)) || ((xPos < ballDiameter/2 + 30) && (vx < 0)))
                 && (dist(0, yPos, 0, paddles[paddleTo].getYpos()) < paddles[paddleTo].getPaddleLength()/2))
@@ -98,7 +105,7 @@ class Ball
         //add new ball
         if(type == "newBall")
         {
-          if(balls.size() < 3)
+          if(balls.size() < 10)
           {
             if((items[i].getYpos() < 40) || (items[i].getYpos() > height - 40))
             {
@@ -134,7 +141,7 @@ class Ball
         //increase paddle from size
         }else if(type == "paddleUp")
         {
-          if(paddles[paddleFrom].getPaddleLength() < 500)
+          if(paddles[paddleFrom].getPaddleLength() < 300)
           {
             paddles[paddleFrom].changePaddle(50);
           }
@@ -142,7 +149,7 @@ class Ball
         //increase paddle to size
         }else if(type == "paddleDown")
         {
-          if(paddles[paddleTo].getPaddleLength() > 150)
+          if(paddles[paddleTo].getPaddleLength() > 100)
           {
             paddles[paddleTo].changePaddle(-50);
           }          
