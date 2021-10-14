@@ -78,7 +78,7 @@ class Ball
       //calculating diffrence of ballX and paddleX
       float yDifference = (yPos - paddles[paddleTo].getYpos());
       //using 1(00/ total) * amount to determine vy after hit
-      vy = (resultantVelocity * 2 / paddles[paddleTo].getPaddleLength()) * yDifference;
+      vy = (resultantVelocity / paddles[paddleTo].getPaddleLength()) * yDifference;
       //using pythagoras and new vy to calculate new x so that the resultant velocity remains the same
       vx = sqrt(pow(resultantVelocity, 2) - pow(vy, 2));
       
