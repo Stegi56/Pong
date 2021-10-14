@@ -122,7 +122,7 @@ class Ball
         //decrease resultant velocity
         }else if(type == "speedDown")
         {
-          if(resultantVelocity > 1)
+          if(resultantVelocity > 2)
           {
             vx /= resultantVelocity;
             vy /= resultantVelocity;
