@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d9688f56-1f00-43c2-9478-0553f4bc30d0" name="Default Changelist" comment="" />
+    <list default="true" id="d9688f56-1f00-43c2-9478-0553f4bc30d0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +39,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -48,7 +52,9 @@
       <option name="presentableId" value="Default" />
       <updated>1634247442977</updated>
       <workItem from="1634247444388" duration="5505000" />
-      <workItem from="1634293847164" duration="126000" />
+      <workItem from="1634293847164" duration="1922000" />
+      <workItem from="1651948057067" duration="808000" />
+      <workItem from="1651949142833" duration="144000" />
     </task>
     <servers />
   </component>
